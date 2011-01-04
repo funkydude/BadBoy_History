@@ -1,0 +1,11 @@
+## Interface: 40000
+## Version: 1.00
+## Title: BadBoy_History
+## Notes: Log all chat that's removed by the various BadBoy addons.
+## Author: Funkydude
+## Dependencies: BadBoy
+## X-Category: Chat/Communication
+## X-License: All Rights Reserved
+
+BadBoy_History.lua
+
