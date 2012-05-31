@@ -3,6 +3,7 @@ local bbhistory = CreateFrame("Frame", "BadBoyHistory", InterfaceOptionsFramePan
 bbhistory:Hide()
 bbhistory.name = "BadBoy_History"
 
+--[[     Start BadBoy Frame     ]]--
 local title = bbhistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 title:SetPoint("TOPLEFT", 16, -16)
 title:SetText("BadBoy_History @project-version@") --wowace magic, replaced with tag version
@@ -34,6 +35,16 @@ bbhistoryBackdrop:SetBackdropColor(0,0,0,1)
 bbhistoryBackdrop:SetPoint("TOPLEFT", title, "BOTTOMLEFT", -5, 0)
 bbhistoryBackdrop:SetPoint("BOTTOMRIGHT", bbhistory, "BOTTOMRIGHT", -27, 5)
 
+local bbhistoryButton = CreateFrame("Button", "BadBoyHistoryButton", bbhistory, "UIPanelButtonTemplate")
+bbhistoryButton:SetWidth(60)
+bbhistoryButton:SetHeight(25)
+bbhistoryButton:SetPoint("TOPRIGHT", bbhistory, "TOPRIGHT", -35, -7)
+bbhistoryButton:SetText(RESET)
+bbhistoryButton:SetScript("OnClick", function(frame)
+	wipe(BBHISTORY)
+	bbhistoryEditBox:SetText("")
+end)
+
 bbhistory:SetScript("OnShow", function()
 	local text
 	for i=1, #BBHISTORY do
@@ -45,6 +56,7 @@ bbhistory:SetScript("OnShow", function()
 	end
 	bbhistoryEditBox:SetText(text or "")
 end)
+--[[     End BadBoy Frame     ]]--
 
 bbhistory:RegisterEvent("PLAYER_LOGIN")
 bbhistory:SetScript("OnEvent", function()
@@ -55,17 +67,9 @@ bbhistory:SetScript("OnEvent", function()
 	BadBoyLogger = function(addon, event, player, msg)
 		event = (event):sub(10)
 		if addon == "BadBoy" then
-			local BBHISTORY = BBHISTORY
-			local num, dump = #BBHISTORY, "["..BetterDate("%I:%M:%S", time()).."]".."["..event.."]".."["..player.."]: "..msg
-			for i=1, num do
-				if BBHISTORY[i]:find(msg, nil, true) then return end
-			end
+			local dump = "["..BetterDate("%I:%M:%S", time()).."]".."["..event.."]".."["..player.."]: "..msg
 			tinsert(BBHISTORY, dump)
 			bbhistoryEditBox:SetText(bbhistoryEditBox:GetText().. "\n\n"..dump)
-
-			if num > 30 then
-				tremove(BBHISTORY, 1)
-			end
 		elseif addon == "Guilded" then
 			--print("|cFF33FF99BadBoy_GUILDED|r:", msg, event)
 		end
