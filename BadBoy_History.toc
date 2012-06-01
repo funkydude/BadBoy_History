@@ -4,7 +4,7 @@
 ## Notes: Log all chat that's removed by the various BadBoy addons.
 ## Author: Funkydude
 ## Dependencies: BadBoy
-## SavedVariables: BBHISTORY
+## SavedVariables: BBHISTORY, BBGHISTORY
 ## X-Category: Chat/Communication
 ## X-License: All Rights Reserved
 
