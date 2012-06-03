@@ -117,7 +117,68 @@ bbghistory:SetScript("OnShow", function()
 	end
 	bbghistoryEditBox:SetText(text or "")
 end)
---[[     End BadBoy Frame     ]]--
+--[[     End Guilded Frame     ]]--
+
+
+
+
+--[[     Start CCleaner Frame     ]]--
+local bbcchistory = CreateFrame("Frame", "BadBoyCCleanerHistory", bbhistory)
+bbcchistory.name, bbcchistory.parent = "CCleaner History", "BadBoy History"
+InterfaceOptions_AddCategory(bbcchistory)
+
+local bbcchistoryTitle = bbcchistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+bbcchistoryTitle:SetPoint("TOPLEFT", 16, -16)
+bbcchistoryTitle:SetText("CCleaner History")
+
+local bbcchistoryScrollArea = CreateFrame("ScrollFrame", "BadBoyCCleanerHistoryScroll", bbcchistory, "UIPanelScrollFrameTemplate")
+bbcchistoryScrollArea:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", 0, -15)
+bbcchistoryScrollArea:SetPoint("BOTTOMRIGHT", bbcchistory, "BOTTOMRIGHT", -30, 10)
+
+local bbcchistoryEditBox = CreateFrame("EditBox", "BadBoyCCleanerHistoryEditBox", bbcchistory)
+bbcchistoryEditBox:SetMultiLine(true)
+bbcchistoryEditBox:SetMaxLetters(99999)
+bbcchistoryEditBox:EnableMouse(false)
+bbcchistoryEditBox:SetAutoFocus(false)
+bbcchistoryEditBox:SetFontObject(ChatFontNormal)
+bbcchistoryEditBox:SetWidth(575)
+bbcchistoryEditBox:SetHeight(500)
+bbcchistoryEditBox:Show()
+
+bbcchistoryScrollArea:SetScrollChild(bbcchistoryEditBox)
+
+local bbcchistoryBackdrop = CreateFrame("Frame", "BadBoyCCleanerHistoryBackdrop", bbcchistory)
+bbcchistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+	tile = true, tileSize = 16, edgeSize = 16,
+	insets = {left = 3, right = 3, top = 5, bottom = 3}}
+)
+bbcchistoryBackdrop:SetBackdropColor(0,0,0,1)
+bbcchistoryBackdrop:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", -5, 0)
+bbcchistoryBackdrop:SetPoint("BOTTOMRIGHT", bbcchistory, "BOTTOMRIGHT", -27, 5)
+
+local bbcchistoryButton = CreateFrame("Button", "BadBoyCCleanerHistoryButton", bbcchistory, "UIPanelButtonTemplate")
+bbcchistoryButton:SetWidth(60)
+bbcchistoryButton:SetHeight(25)
+bbcchistoryButton:SetPoint("TOPRIGHT", bbcchistory, "TOPRIGHT", -35, -7)
+bbcchistoryButton:SetText(RESET)
+bbcchistoryButton:SetScript("OnClick", function(frame)
+	wipe(BBCCHISTORY)
+	bbcchistoryEditBox:SetText("")
+end)
+
+bbcchistory:SetScript("OnShow", function()
+	local text
+	for i=1, #BBCCHISTORY do
+		if not text then
+			text = BBCCHISTORY[i]
+		else
+			text = text.."\n\n"..BBCCHISTORY[i]
+		end
+	end
+	bbcchistoryEditBox:SetText(text or "")
+end)
+--[[     End CCleaner Frame     ]]--
 
 bbhistory:RegisterEvent("PLAYER_LOGIN")
 bbhistory:SetScript("OnEvent", function()
@@ -127,8 +188,11 @@ bbhistory:SetScript("OnEvent", function()
 	if type(BBGHISTORY) ~= "table" then
 		BBGHISTORY = {}
 	end
+	if type(BBCCHISTORY) ~= "table" then
+		BBCCHISTORY = {}
+	end
 
-	BadBoyLogger = function(addon, event, player, msg)
+	BadBoyLog = function(addon, event, player, msg)
 		event = (event):sub(10)
 		local dump = "["..BetterDate("%I:%M:%S", time()).."]".."["..event.."]".."["..player.."]: "..msg
 		if addon == "BadBoy" then
@@ -137,6 +201,9 @@ bbhistory:SetScript("OnEvent", function()
 		elseif addon == "Guilded" then
 			tinsert(BBGHISTORY, dump)
 			bbghistoryEditBox:SetText(bbghistoryEditBox:GetText().. "\n\n"..dump)
+		elseif addon == "CCleaner" then
+			tinsert(BBCCHISTORY, dump)
+			bbcchistoryEditBox:SetText(bbcchistoryEditBox:GetText().. "\n\n"..dump)
 		end
 	end
 end)
