@@ -61,75 +61,14 @@ end)
 
 
 
---[[     Start Guilded Frame     ]]--
-local bbghistory = CreateFrame("Frame", "BadBoyGuildedHistory", bbhistory)
-bbghistory.name, bbghistory.parent = "Guilded History", "BadBoy History"
-InterfaceOptions_AddCategory(bbghistory)
-
-local bbghistoryTitle = bbghistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
-bbghistoryTitle:SetPoint("TOPLEFT", 16, -16)
-bbghistoryTitle:SetText("Guilded History")
-
-local bbghistoryScrollArea = CreateFrame("ScrollFrame", "BadBoyGuildedHistoryScroll", bbghistory, "UIPanelScrollFrameTemplate")
-bbghistoryScrollArea:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", 0, -15)
-bbghistoryScrollArea:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -30, 10)
-
-local bbghistoryEditBox = CreateFrame("EditBox", "BadBoyGuildedHistoryEditBox", bbghistory)
-bbghistoryEditBox:SetMultiLine(true)
-bbghistoryEditBox:SetMaxLetters(99999)
-bbghistoryEditBox:EnableMouse(false)
-bbghistoryEditBox:SetAutoFocus(false)
-bbghistoryEditBox:SetFontObject(ChatFontNormal)
-bbghistoryEditBox:SetWidth(575)
-bbghistoryEditBox:SetHeight(500)
-bbghistoryEditBox:Show()
-
-bbghistoryScrollArea:SetScrollChild(bbghistoryEditBox)
-
-local bbghistoryBackdrop = CreateFrame("Frame", "BadBoyGuildedHistoryBackdrop", bbghistory)
-bbghistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
-	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-	tile = true, tileSize = 16, edgeSize = 16,
-	insets = {left = 3, right = 3, top = 5, bottom = 3}}
-)
-bbghistoryBackdrop:SetBackdropColor(0,0,0,1)
-bbghistoryBackdrop:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", -5, 0)
-bbghistoryBackdrop:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -27, 5)
-
-local bbghistoryButton = CreateFrame("Button", "BadBoyGuildedHistoryButton", bbghistory, "UIPanelButtonTemplate")
-bbghistoryButton:SetWidth(60)
-bbghistoryButton:SetHeight(25)
-bbghistoryButton:SetPoint("TOPRIGHT", bbghistory, "TOPRIGHT", -35, -7)
-bbghistoryButton:SetText(RESET)
-bbghistoryButton:SetScript("OnClick", function(frame)
-	wipe(BBGHISTORY)
-	bbghistoryEditBox:SetText("")
-end)
-
-bbghistory:SetScript("OnShow", function()
-	local text
-	for i=1, #BBGHISTORY do
-		if not text then
-			text = BBGHISTORY[i]
-		else
-			text = text.."\n\n"..BBGHISTORY[i]
-		end
-	end
-	bbghistoryEditBox:SetText(text or "")
-end)
---[[     End Guilded Frame     ]]--
-
-
-
-
 --[[     Start CCleaner Frame     ]]--
 local bbcchistory = CreateFrame("Frame", "BadBoyCCleanerHistory", bbhistory)
-bbcchistory.name, bbcchistory.parent = "CCleaner History", "BadBoy History"
+bbcchistory.name, bbcchistory.parent = "_CCleaner History", "BadBoy History"
 InterfaceOptions_AddCategory(bbcchistory)
 
 local bbcchistoryTitle = bbcchistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 bbcchistoryTitle:SetPoint("TOPLEFT", 16, -16)
-bbcchistoryTitle:SetText("CCleaner History")
+bbcchistoryTitle:SetText("_CCleaner History")
 
 local bbcchistoryScrollArea = CreateFrame("ScrollFrame", "BadBoyCCleanerHistoryScroll", bbcchistory, "UIPanelScrollFrameTemplate")
 bbcchistoryScrollArea:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", 0, -15)
@@ -179,6 +118,67 @@ bbcchistory:SetScript("OnShow", function()
 	bbcchistoryEditBox:SetText(text or "")
 end)
 --[[     End CCleaner Frame     ]]--
+
+
+
+
+--[[     Start Guilded Frame     ]]--
+local bbghistory = CreateFrame("Frame", "BadBoyGuildedHistory", bbhistory)
+bbghistory.name, bbghistory.parent = "_Guilded History", "BadBoy History"
+InterfaceOptions_AddCategory(bbghistory)
+
+local bbghistoryTitle = bbghistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+bbghistoryTitle:SetPoint("TOPLEFT", 16, -16)
+bbghistoryTitle:SetText("_Guilded History")
+
+local bbghistoryScrollArea = CreateFrame("ScrollFrame", "BadBoyGuildedHistoryScroll", bbghistory, "UIPanelScrollFrameTemplate")
+bbghistoryScrollArea:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", 0, -15)
+bbghistoryScrollArea:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -30, 10)
+
+local bbghistoryEditBox = CreateFrame("EditBox", "BadBoyGuildedHistoryEditBox", bbghistory)
+bbghistoryEditBox:SetMultiLine(true)
+bbghistoryEditBox:SetMaxLetters(99999)
+bbghistoryEditBox:EnableMouse(false)
+bbghistoryEditBox:SetAutoFocus(false)
+bbghistoryEditBox:SetFontObject(ChatFontNormal)
+bbghistoryEditBox:SetWidth(575)
+bbghistoryEditBox:SetHeight(500)
+bbghistoryEditBox:Show()
+
+bbghistoryScrollArea:SetScrollChild(bbghistoryEditBox)
+
+local bbghistoryBackdrop = CreateFrame("Frame", "BadBoyGuildedHistoryBackdrop", bbghistory)
+bbghistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+	tile = true, tileSize = 16, edgeSize = 16,
+	insets = {left = 3, right = 3, top = 5, bottom = 3}}
+)
+bbghistoryBackdrop:SetBackdropColor(0,0,0,1)
+bbghistoryBackdrop:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", -5, 0)
+bbghistoryBackdrop:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -27, 5)
+
+local bbghistoryButton = CreateFrame("Button", "BadBoyGuildedHistoryButton", bbghistory, "UIPanelButtonTemplate")
+bbghistoryButton:SetWidth(60)
+bbghistoryButton:SetHeight(25)
+bbghistoryButton:SetPoint("TOPRIGHT", bbghistory, "TOPRIGHT", -35, -7)
+bbghistoryButton:SetText(RESET)
+bbghistoryButton:SetScript("OnClick", function(frame)
+	wipe(BBGHISTORY)
+	bbghistoryEditBox:SetText("")
+end)
+
+bbghistory:SetScript("OnShow", function()
+	local text
+	for i=1, #BBGHISTORY do
+		if not text then
+			text = BBGHISTORY[i]
+		else
+			text = text.."\n\n"..BBGHISTORY[i]
+		end
+	end
+	bbghistoryEditBox:SetText(text or "")
+end)
+--[[     End Guilded Frame     ]]--
 
 bbhistory:RegisterEvent("PLAYER_LOGIN")
 bbhistory:SetScript("OnEvent", function()
