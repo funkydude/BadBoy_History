@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50001
 ## Version: 1.1
 ## Title: BadBoy_History
 ## Notes: Log all chat that's removed by the various BadBoy addons.
