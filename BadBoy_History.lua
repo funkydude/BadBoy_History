@@ -1,8 +1,10 @@
 
 local BBH = CreateFrame("Frame", "BadBoyHistory", InterfaceOptionsFramePanelContainer)
 
-BBH:RegisterEvent("PLAYER_LOGIN")
-BBH:SetScript("OnEvent", function(frame)
+BBH:RegisterEvent("ADDON_LOADED")
+BBH:SetScript("OnEvent", function(frame, _, ad)
+	if ad ~= "BadBoy_History" then return end
+
 	--[[     Setup DB     ]]--
 	if type(BBHISTORY) ~= "table" then
 		BBHISTORY = {}
@@ -213,7 +215,7 @@ BBH:SetScript("OnEvent", function(frame)
 		end
 	end
 
-	frame:UnregisterEvent("PLAYER_LOGIN")
+	frame:UnregisterEvent("ADDON_LOADED")
 	frame:SetScript("OnEvent", nil)
 end)
 
