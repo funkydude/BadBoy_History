@@ -9,11 +9,34 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	if type(BBHISTORY) ~= "table" then
 		BBHISTORY = {}
 	end
+	local num = #BBHISTORY
+	if num > 50 then
+		num = num - 50
+		for i = 1, num do
+			tremove(BBHISTORY, 1)
+		end
+	end
+
 	if type(BBGHISTORY) ~= "table" then
 		BBGHISTORY = {}
 	end
+	num = #BBGHISTORY
+	if num > 50 then
+		num = num - 50
+		for i = 1, num do
+			tremove(BBGHISTORY, 1)
+		end
+	end
+
 	if type(BBCCHISTORY) ~= "table" then
 		BBCCHISTORY = {}
+	end
+	num = #BBCCHISTORY
+	if num > 50 then
+		num = num - 50
+		for i = 1, num do
+			tremove(BBCCHISTORY, 1)
+		end
 	end
 
 
