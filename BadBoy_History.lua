@@ -55,7 +55,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	bbhistoryScrollArea:SetPoint("TOPLEFT", bbhistoryTitle, "BOTTOMLEFT", 0, -15)
 	bbhistoryScrollArea:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -30, 10)
 
-	local bbhistoryEditBox = CreateFrame("EditBox", "BadBoyHistoryEditBox", frame)
+	local bbhistoryEditBox = CreateFrame("EditBox", nil, frame)
 	bbhistoryEditBox:SetMultiLine(true)
 	bbhistoryEditBox:SetMaxLetters(99999)
 	bbhistoryEditBox:EnableMouse(false)
@@ -67,7 +67,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbhistoryScrollArea:SetScrollChild(bbhistoryEditBox)
 
-	local bbhistoryBackdrop = CreateFrame("Frame", "BadBoyHistoryBackdrop", frame)
+	local bbhistoryBackdrop = CreateFrame("Frame", nil, frame)
 	bbhistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
@@ -77,7 +77,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	bbhistoryBackdrop:SetPoint("TOPLEFT", bbhistoryTitle, "BOTTOMLEFT", -5, 0)
 	bbhistoryBackdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -27, 5)
 
-	local bbhistoryButton = CreateFrame("Button", "BadBoyHistoryButton", frame, "UIPanelButtonTemplate")
+	local bbhistoryButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	bbhistoryButton:SetWidth(60)
 	bbhistoryButton:SetHeight(25)
 	bbhistoryButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -35, -7)
@@ -104,7 +104,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 
 	--[[     Start CCleaner Frame     ]]--
-	local bbcchistory = CreateFrame("Frame", "BadBoyCCleanerHistory", frame)
+	local bbcchistory = CreateFrame("Frame", nil, frame)
 	bbcchistory.name, bbcchistory.parent = "_CCleaner History", "BadBoy History"
 	InterfaceOptions_AddCategory(bbcchistory)
 
@@ -116,7 +116,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	bbcchistoryScrollArea:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", 0, -15)
 	bbcchistoryScrollArea:SetPoint("BOTTOMRIGHT", bbcchistory, "BOTTOMRIGHT", -30, 10)
 
-	local bbcchistoryEditBox = CreateFrame("EditBox", "BadBoyCCleanerHistoryEditBox", bbcchistory)
+	local bbcchistoryEditBox = CreateFrame("EditBox", nil, bbcchistory)
 	bbcchistoryEditBox:SetMultiLine(true)
 	bbcchistoryEditBox:SetMaxLetters(99999)
 	bbcchistoryEditBox:EnableMouse(false)
@@ -128,7 +128,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbcchistoryScrollArea:SetScrollChild(bbcchistoryEditBox)
 
-	local bbcchistoryBackdrop = CreateFrame("Frame", "BadBoyCCleanerHistoryBackdrop", bbcchistory)
+	local bbcchistoryBackdrop = CreateFrame("Frame", nil, bbcchistory)
 	bbcchistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
@@ -138,7 +138,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	bbcchistoryBackdrop:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", -5, 0)
 	bbcchistoryBackdrop:SetPoint("BOTTOMRIGHT", bbcchistory, "BOTTOMRIGHT", -27, 5)
 
-	local bbcchistoryButton = CreateFrame("Button", "BadBoyCCleanerHistoryButton", bbcchistory, "UIPanelButtonTemplate")
+	local bbcchistoryButton = CreateFrame("Button", nil, bbcchistory, "UIPanelButtonTemplate")
 	bbcchistoryButton:SetWidth(60)
 	bbcchistoryButton:SetHeight(25)
 	bbcchistoryButton:SetPoint("TOPRIGHT", bbcchistory, "TOPRIGHT", -35, -7)
@@ -165,7 +165,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 
 	--[[     Start Guilded Frame     ]]--
-	local bbghistory = CreateFrame("Frame", "BadBoyGuildedHistory", frame)
+	local bbghistory = CreateFrame("Frame", nil, frame)
 	bbghistory.name, bbghistory.parent = "_Guilded History", "BadBoy History"
 	InterfaceOptions_AddCategory(bbghistory)
 
@@ -177,7 +177,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	bbghistoryScrollArea:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", 0, -15)
 	bbghistoryScrollArea:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -30, 10)
 
-	local bbghistoryEditBox = CreateFrame("EditBox", "BadBoyGuildedHistoryEditBox", bbghistory)
+	local bbghistoryEditBox = CreateFrame("EditBox", nil, bbghistory)
 	bbghistoryEditBox:SetMultiLine(true)
 	bbghistoryEditBox:SetMaxLetters(99999)
 	bbghistoryEditBox:EnableMouse(false)
@@ -189,7 +189,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbghistoryScrollArea:SetScrollChild(bbghistoryEditBox)
 
-	local bbghistoryBackdrop = CreateFrame("Frame", "BadBoyGuildedHistoryBackdrop", bbghistory)
+	local bbghistoryBackdrop = CreateFrame("Frame", nil, bbghistory)
 	bbghistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
@@ -199,7 +199,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 	bbghistoryBackdrop:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", -5, 0)
 	bbghistoryBackdrop:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -27, 5)
 
-	local bbghistoryButton = CreateFrame("Button", "BadBoyGuildedHistoryButton", bbghistory, "UIPanelButtonTemplate")
+	local bbghistoryButton = CreateFrame("Button", nil, bbghistory, "UIPanelButtonTemplate")
 	bbghistoryButton:SetWidth(60)
 	bbghistoryButton:SetHeight(25)
 	bbghistoryButton:SetPoint("TOPRIGHT", bbghistory, "TOPRIGHT", -35, -7)
