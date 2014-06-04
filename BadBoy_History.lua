@@ -224,8 +224,11 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	--[[     Set Global Logging Function     ]]--
 	BadBoyLog = function(addon, event, player, msg)
-		event = (event):sub(10)
-		local dump = "["..BetterDate("%I:%M:%S", time()).."]".."["..event.."]".."["..player.."]: "..msg
+		event = event:sub(10)
+		local timeStamp = BetterDate(CHAT_TIMESTAMP_FORMAT or "%I:%M:%S", time()) --Falls back to hardcoded format if nil
+		timeStamp = timeStamp:gsub(" $", "") --Remove space at the end
+		local dump = "["..timeStamp.."]".."["..event.."]".."["..player.."]: "..msg
+
 		if addon == "BadBoy" then
 			tinsert(BBHISTORY, dump)
 			bbhistoryEditBox:SetText(bbhistoryEditBox:GetText().. "\n\n"..dump)
