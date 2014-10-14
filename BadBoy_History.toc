@@ -1,5 +1,4 @@
-## Interface: 50400
-## Version: 1.40
+## Interface: 60000
 ## Title: BadBoy_History
 ## Notes: Log all chat that's removed by the various BadBoy addons.
 ## Author: Funkydude
