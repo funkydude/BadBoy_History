@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80200
 ## Version: @project-version@
 ## Title: BadBoy_History
 ## Notes: Log all chat that's removed by the various BadBoy addons.
