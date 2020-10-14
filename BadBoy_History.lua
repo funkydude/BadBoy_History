@@ -67,7 +67,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbhistoryScrollArea:SetScrollChild(bbhistoryEditBox)
 
-	local bbhistoryBackdrop = CreateFrame("Frame", nil, frame)
+	local bbhistoryBackdrop = CreateFrame("Frame", nil, frame, "BackdropTemplate")
 	bbhistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
@@ -128,7 +128,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbcchistoryScrollArea:SetScrollChild(bbcchistoryEditBox)
 
-	local bbcchistoryBackdrop = CreateFrame("Frame", nil, bbcchistory)
+	local bbcchistoryBackdrop = CreateFrame("Frame", nil, bbcchistory, "BackdropTemplate")
 	bbcchistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
@@ -189,7 +189,7 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbghistoryScrollArea:SetScrollChild(bbghistoryEditBox)
 
-	local bbghistoryBackdrop = CreateFrame("Frame", nil, bbghistory)
+	local bbghistoryBackdrop = CreateFrame("Frame", nil, bbghistory, "BackdropTemplate")
 	bbghistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
 		tile = true, tileSize = 16, edgeSize = 16,
