@@ -14,7 +14,7 @@
 ## Notes-ptBR: Log all chat that's removed by the various BadBoy addons.
 ## Author: Funkydude
 ## Dependencies: BadBoy
-## SavedVariables: BBHISTORY, BBGHISTORY, BBCCHISTORY
+## SavedVariables: BBH_Logs
 ## X-Category: Chat/Communication
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
 ## X-Curse-Project-ID: 28451

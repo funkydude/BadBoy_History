@@ -5,5 +5,7 @@ ignore = {
 
 }
 globals = {
-
+	"BBH_Logs",
+	"CreateFrame",
+	"InterfaceOptionsFramePanelContainer",
 }

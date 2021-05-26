@@ -2,45 +2,35 @@
 local BBH = CreateFrame("Frame", "BadBoyHistory", InterfaceOptionsFramePanelContainer)
 
 BBH:RegisterEvent("ADDON_LOADED")
-BBH:SetScript("OnEvent", function(frame, _, ad)
-	if ad ~= "BadBoy_History" then return end
+BBH:SetScript("OnEvent", function(frame, event, addonName)
+	if addonName ~= "BadBoy_History" then return end
 
 	--[[     Setup DB     ]]--
-	if type(BBHISTORY) ~= "table" then
-		BBHISTORY = {}
-	end
-	local num = #BBHISTORY
-	if num > 50 then
-		num = num - 50
-		for i = 1, num do
-			tremove(BBHISTORY, 1)
-		end
+	if type(BBH_Logs) ~= "table" then
+		BBH_Logs = {
+			spam = {},
+			guild = {},
+			cleaner = {},
+		}
 	end
 
-	if type(BBGHISTORY) ~= "table" then
-		BBGHISTORY = {}
-	end
-	num = #BBGHISTORY
-	if num > 50 then
-		num = num - 50
-		for i = 1, num do
-			tremove(BBGHISTORY, 1)
-		end
+	--[[     Prevent DB growing too large     ]]--
+	local tremove, tconcat, format = table.remove, table.concat, string.format
+
+	-- BadBoy (spam)
+	while #BBH_Logs.spam > 50 do
+		tremove(BBH_Logs.spam, 1)
 	end
 
-	if type(BBCCHISTORY) ~= "table" then
-		BBCCHISTORY = {}
-	end
-	num = #BBCCHISTORY
-	if num > 50 then
-		num = num - 50
-		for i = 1, num do
-			tremove(BBCCHISTORY, 1)
-		end
+	-- BadBoy_Guilded (guild)
+	while #BBH_Logs.guild > 50 do
+		tremove(BBH_Logs.guild, 1)
 	end
 
-
-
+	-- BadBoy_CCleaner (cleaner)
+	while #BBH_Logs.cleaner > 50 do
+		tremove(BBH_Logs.cleaner, 1)
+	end
 
 	--[[     Start BadBoy Frame     ]]--
 	frame:Hide()
@@ -67,36 +57,23 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbhistoryScrollArea:SetScrollChild(bbhistoryEditBox)
 
-	local bbhistoryBackdrop = CreateFrame("Frame", nil, frame, "BackdropTemplate")
-	bbhistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true, tileSize = 16, edgeSize = 16,
-		insets = {left = 3, right = 3, top = 5, bottom = 3}}
-	)
-	bbhistoryBackdrop:SetBackdropColor(0,0,0,1)
-	bbhistoryBackdrop:SetPoint("TOPLEFT", bbhistoryTitle, "BOTTOMLEFT", -5, 0)
-	bbhistoryBackdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -27, 5)
+	local bbhistoryBackdrop = frame:CreateTexture()
+	bbhistoryBackdrop:SetPoint("TOPLEFT", bbhistoryTitle, "BOTTOMLEFT", -5, -5)
+	bbhistoryBackdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -30, 10)
+	bbhistoryBackdrop:SetColorTexture(0, 0, 0, 0.6)
 
 	local bbhistoryButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 	bbhistoryButton:SetWidth(60)
 	bbhistoryButton:SetHeight(25)
 	bbhistoryButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -35, -7)
 	bbhistoryButton:SetText(RESET)
-	bbhistoryButton:SetScript("OnClick", function(frame)
-		wipe(BBHISTORY)
+	bbhistoryButton:SetScript("OnClick", function()
+		BBH_Logs.spam = {}
 		bbhistoryEditBox:SetText("")
 	end)
 
 	frame:SetScript("OnShow", function()
-		local text
-		for i=1, #BBHISTORY do
-			if not text then
-				text = BBHISTORY[i]
-			else
-				text = text.."\n\n"..BBHISTORY[i]
-			end
-		end
-		bbhistoryEditBox:SetText(text or "")
+		bbhistoryEditBox:SetText(tconcat(BBH_Logs.spam, "\n\n"))
 	end)
 	--[[     End BadBoy Frame     ]]--
 
@@ -128,36 +105,23 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbcchistoryScrollArea:SetScrollChild(bbcchistoryEditBox)
 
-	local bbcchistoryBackdrop = CreateFrame("Frame", nil, bbcchistory, "BackdropTemplate")
-	bbcchistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true, tileSize = 16, edgeSize = 16,
-		insets = {left = 3, right = 3, top = 5, bottom = 3}}
-	)
-	bbcchistoryBackdrop:SetBackdropColor(0,0,0,1)
-	bbcchistoryBackdrop:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", -5, 0)
-	bbcchistoryBackdrop:SetPoint("BOTTOMRIGHT", bbcchistory, "BOTTOMRIGHT", -27, 5)
+	local bbcchistoryBackdrop = bbcchistory:CreateTexture()
+	bbcchistoryBackdrop:SetPoint("TOPLEFT", bbcchistoryTitle, "BOTTOMLEFT", -5, -5)
+	bbcchistoryBackdrop:SetPoint("BOTTOMRIGHT", bbcchistory, "BOTTOMRIGHT", -30, 10)
+	bbcchistoryBackdrop:SetColorTexture(0, 0, 0, 0.6)
 
 	local bbcchistoryButton = CreateFrame("Button", nil, bbcchistory, "UIPanelButtonTemplate")
 	bbcchistoryButton:SetWidth(60)
 	bbcchistoryButton:SetHeight(25)
 	bbcchistoryButton:SetPoint("TOPRIGHT", bbcchistory, "TOPRIGHT", -35, -7)
 	bbcchistoryButton:SetText(RESET)
-	bbcchistoryButton:SetScript("OnClick", function(frame)
-		wipe(BBCCHISTORY)
+	bbcchistoryButton:SetScript("OnClick", function()
+		BBH_Logs.cleaner = {}
 		bbcchistoryEditBox:SetText("")
 	end)
 
 	bbcchistory:SetScript("OnShow", function()
-		local text
-		for i=1, #BBCCHISTORY do
-			if not text then
-				text = BBCCHISTORY[i]
-			else
-				text = text.."\n\n"..BBCCHISTORY[i]
-			end
-		end
-		bbcchistoryEditBox:SetText(text or "")
+		bbcchistoryEditBox:SetText(tconcat(BBH_Logs.cleaner, "\n\n"))
 	end)
 	--[[     End CCleaner Frame     ]]--
 
@@ -189,59 +153,49 @@ BBH:SetScript("OnEvent", function(frame, _, ad)
 
 	bbghistoryScrollArea:SetScrollChild(bbghistoryEditBox)
 
-	local bbghistoryBackdrop = CreateFrame("Frame", nil, bbghistory, "BackdropTemplate")
-	bbghistoryBackdrop:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
-		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
-		tile = true, tileSize = 16, edgeSize = 16,
-		insets = {left = 3, right = 3, top = 5, bottom = 3}}
-	)
-	bbghistoryBackdrop:SetBackdropColor(0,0,0,1)
-	bbghistoryBackdrop:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", -5, 0)
-	bbghistoryBackdrop:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -27, 5)
+	local bbghistoryBackdrop = bbghistory:CreateTexture()
+	bbghistoryBackdrop:SetPoint("TOPLEFT", bbghistoryTitle, "BOTTOMLEFT", -5, -5)
+	bbghistoryBackdrop:SetPoint("BOTTOMRIGHT", bbghistory, "BOTTOMRIGHT", -30, 10)
+	bbghistoryBackdrop:SetColorTexture(0, 0, 0, 0.6)
 
 	local bbghistoryButton = CreateFrame("Button", nil, bbghistory, "UIPanelButtonTemplate")
 	bbghistoryButton:SetWidth(60)
 	bbghistoryButton:SetHeight(25)
 	bbghistoryButton:SetPoint("TOPRIGHT", bbghistory, "TOPRIGHT", -35, -7)
 	bbghistoryButton:SetText(RESET)
-	bbghistoryButton:SetScript("OnClick", function(frame)
-		wipe(BBGHISTORY)
+	bbghistoryButton:SetScript("OnClick", function()
+		BBH_Logs.guild = {}
 		bbghistoryEditBox:SetText("")
 	end)
 
 	bbghistory:SetScript("OnShow", function()
-		local text
-		for i=1, #BBGHISTORY do
-			if not text then
-				text = BBGHISTORY[i]
-			else
-				text = text.."\n\n"..BBGHISTORY[i]
-			end
-		end
-		bbghistoryEditBox:SetText(text or "")
+		bbghistoryEditBox:SetText(tconcat(BBH_Logs.guild, "\n\n"))
 	end)
 	--[[     End Guilded Frame     ]]--
 
 	--[[     Set Global Logging Function     ]]--
-	BadBoyLog = function(addon, event, player, msg)
-		event = event:sub(10)
-		local timeStamp = BetterDate(CHAT_TIMESTAMP_FORMAT or "%I:%M:%S", time()) --Falls back to hardcoded format if nil
-		timeStamp = timeStamp:gsub(" $", "") --Remove space at the end
-		local dump = "["..timeStamp.."]".."["..event.."]".."["..player.."]: "..msg
+	BadBoyLog = function(addon, fullEvent, player, msg)
+		local shortEvent = fullEvent:sub(10)
+		local dateTbl = date("*t")
+		local spamEntry = format(
+			"[%d/%02d/%02d %02d:%02d:%02d][%s][%s]: %s",
+			dateTbl.year, dateTbl.month, dateTbl.day,
+			dateTbl.hour, dateTbl.min, dateTbl.sec,
+			shortEvent, player, msg
+		)
 
 		if addon == "BadBoy" then
-			tinsert(BBHISTORY, dump)
-			bbhistoryEditBox:SetText(bbhistoryEditBox:GetText().. "\n\n"..dump)
+			BBH_Logs.spam[#BBH_Logs.spam+1] = spamEntry
+			bbhistoryEditBox:SetText(format("%s\n\n%s", bbhistoryEditBox:GetText(), spamEntry))
 		elseif addon == "Guilded" then
-			tinsert(BBGHISTORY, dump)
-			bbghistoryEditBox:SetText(bbghistoryEditBox:GetText().. "\n\n"..dump)
+			BBH_Logs.guild[#BBH_Logs.guild+1] = spamEntry
+			bbghistoryEditBox:SetText(format("%s\n\n%s", bbghistoryEditBox:GetText(), spamEntry))
 		elseif addon == "CCleaner" then
-			tinsert(BBCCHISTORY, dump)
-			bbcchistoryEditBox:SetText(bbcchistoryEditBox:GetText().. "\n\n"..dump)
+			BBH_Logs.cleaner[#BBH_Logs.cleaner+1] = spamEntry
+			bbcchistoryEditBox:SetText(format("%s\n\n%s", bbcchistoryEditBox:GetText(), spamEntry))
 		end
 	end
 
-	frame:UnregisterEvent("ADDON_LOADED")
+	frame:UnregisterEvent(event)
 	frame:SetScript("OnEvent", nil)
 end)
-
