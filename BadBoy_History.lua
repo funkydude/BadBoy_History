@@ -1,5 +1,6 @@
 
 local BBH = CreateFrame("Frame", "BadBoyHistory", InterfaceOptionsFramePanelContainer)
+local tinsert, tconcat, format, sub, date = table.insert, table.concat, string.format, string.sub, date
 
 BBH:RegisterEvent("ADDON_LOADED")
 BBH:SetScript("OnEvent", function(frame, event, addonName)
@@ -14,22 +15,20 @@ BBH:SetScript("OnEvent", function(frame, event, addonName)
 		}
 	end
 
-	--[[     Prevent DB growing too large     ]]--
-	local tremove, tconcat, format = table.remove, table.concat, string.format
-
+	--[[     Limits logs to 50     ]]--
 	-- BadBoy (spam)
-	while #BBH_Logs.spam > 50 do
-		tremove(BBH_Logs.spam, 1)
+	for i = #BBH_Logs.spam, 50, -1 do
+		BBH_Logs.spam[i] = nil
 	end
 
 	-- BadBoy_Guilded (guild)
-	while #BBH_Logs.guild > 50 do
-		tremove(BBH_Logs.guild, 1)
+	for i = #BBH_Logs.guild, 50, -1 do
+		BBH_Logs.guild[i] = nil
 	end
 
 	-- BadBoy_CCleaner (cleaner)
-	while #BBH_Logs.cleaner > 50 do
-		tremove(BBH_Logs.cleaner, 1)
+	for i = #BBH_Logs.cleaner, 50, -1 do
+		BBH_Logs.cleaner[i] = nil
 	end
 
 	--[[     Start BadBoy Frame     ]]--
@@ -175,7 +174,7 @@ BBH:SetScript("OnEvent", function(frame, event, addonName)
 
 	--[[     Set Global Logging Function     ]]--
 	BadBoyLog = function(addon, fullEvent, player, msg)
-		local shortEvent = fullEvent:sub(10)
+		local shortEvent = sub(fullEvent, 10)
 		local dateTbl = date("*t")
 		local spamEntry = format(
 			"[%d/%02d/%02d %02d:%02d:%02d][%s][%s]: %s",
@@ -185,14 +184,14 @@ BBH:SetScript("OnEvent", function(frame, event, addonName)
 		)
 
 		if addon == "BadBoy" then
-			BBH_Logs.spam[#BBH_Logs.spam+1] = spamEntry
-			bbhistoryEditBox:SetText(format("%s\n\n%s", bbhistoryEditBox:GetText(), spamEntry))
+			tinsert(BBH_Logs.spam, 1, spamEntry)
+			bbhistoryEditBox:SetText(format("%s\n\n%s", spamEntry, bbhistoryEditBox:GetText()))
 		elseif addon == "Guilded" then
-			BBH_Logs.guild[#BBH_Logs.guild+1] = spamEntry
-			bbghistoryEditBox:SetText(format("%s\n\n%s", bbghistoryEditBox:GetText(), spamEntry))
+			tinsert(BBH_Logs.guild, 1, spamEntry)
+			bbghistoryEditBox:SetText(format("%s\n\n%s", spamEntry, bbghistoryEditBox:GetText()))
 		elseif addon == "CCleaner" then
-			BBH_Logs.cleaner[#BBH_Logs.cleaner+1] = spamEntry
-			bbcchistoryEditBox:SetText(format("%s\n\n%s", bbcchistoryEditBox:GetText(), spamEntry))
+			tinsert(BBH_Logs.cleaner, 1, spamEntry)
+			bbcchistoryEditBox:SetText(format("%s\n\n%s", spamEntry, bbcchistoryEditBox:GetText()))
 		end
 	end
 
