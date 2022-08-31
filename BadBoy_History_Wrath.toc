@@ -1,0 +1,24 @@
+## Interface: 30400
+## Version: @project-version@
+## Title: BadBoy_History
+## Notes: Log all chat that's removed by the various BadBoy addons.
+## Notes-deDE: Log all chat that's removed by the various BadBoy addons.
+## Notes-ruRU: Log all chat that's removed by the various BadBoy addons.
+## Notes-zhCN: Log all chat that's removed by the various BadBoy addons.
+## Notes-zhTW: Log all chat that's removed by the various BadBoy addons.
+## Notes-koKR: Log all chat that's removed by the various BadBoy addons.
+## Notes-frFR: Log all chat that's removed by the various BadBoy addons.
+## Notes-esES: Log all chat that's removed by the various BadBoy addons.
+## Notes-esMX: Log all chat that's removed by the various BadBoy addons.
+## Notes-itIT: Log all chat that's removed by the various BadBoy addons.
+## Notes-ptBR: Log all chat that's removed by the various BadBoy addons.
+## Author: Funkydude
+## Dependencies: BadBoy
+## SavedVariables: BBH_Logs
+## X-Category: Chat/Communication
+## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
+## X-Curse-Project-ID: 28451
+## X-WoWI-ID: 21134
+
+BadBoy_History.lua
+
