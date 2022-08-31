@@ -19,6 +19,7 @@
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
 ## X-Curse-Project-ID: 28451
 ## X-WoWI-ID: 21134
+## X-Wago-ID: e56n5mN9
 
 BadBoy_History.lua
 
