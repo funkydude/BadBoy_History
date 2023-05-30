@@ -3,7 +3,7 @@
 ## Title: BadBoy_History
 ## Notes: Log all chat that's removed by the various BadBoy addons.
 ## Notes-deDE: Log all chat that's removed by the various BadBoy addons.
-## Notes-ruRU: Log all chat that's removed by the various BadBoy addons.
+## Notes-ruRU: Записывает все чаты, удаленные различными дополнениями BadBoy.
 ## Notes-zhCN: Log all chat that's removed by the various BadBoy addons.
 ## Notes-zhTW: Log all chat that's removed by the various BadBoy addons.
 ## Notes-koKR: Log all chat that's removed by the various BadBoy addons.
