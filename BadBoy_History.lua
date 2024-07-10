@@ -34,7 +34,13 @@ BBH:SetScript("OnEvent", function(frame, event, addonName)
 	--[[     Start BadBoy Frame     ]]--
 	frame:Hide()
 	frame.name = "BadBoy History"
-	InterfaceOptions_AddCategory(frame)
+	if InterfaceOptions_AddCategory then -- XXX compat
+		InterfaceOptions_AddCategory(frame)
+	else
+		local category = Settings.RegisterCanvasLayoutCategory(frame, frame.name)
+		frame.settingsCategory = category
+		Settings.RegisterAddOnCategory(category)
+	end
 
 	local bbhistoryTitle = frame:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	bbhistoryTitle:SetPoint("TOPLEFT", 16, -16)
@@ -82,7 +88,12 @@ BBH:SetScript("OnEvent", function(frame, event, addonName)
 	--[[     Start CCleaner Frame     ]]--
 	local bbcchistory = CreateFrame("Frame", nil, frame)
 	bbcchistory.name, bbcchistory.parent = "_CCleaner History", "BadBoy History"
-	InterfaceOptions_AddCategory(bbcchistory)
+	if InterfaceOptions_AddCategory then -- XXX compat
+		InterfaceOptions_AddCategory(bbcchistory)
+	else
+		local subcategory = Settings.RegisterCanvasLayoutSubcategory(frame.settingsCategory, bbcchistory, bbcchistory.name)
+		Settings.RegisterAddOnCategory(subcategory)
+	end
 
 	local bbcchistoryTitle = bbcchistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	bbcchistoryTitle:SetPoint("TOPLEFT", 16, -16)
@@ -130,7 +141,12 @@ BBH:SetScript("OnEvent", function(frame, event, addonName)
 	--[[     Start Guilded Frame     ]]--
 	local bbghistory = CreateFrame("Frame", nil, frame)
 	bbghistory.name, bbghistory.parent = "_Guilded History", "BadBoy History"
-	InterfaceOptions_AddCategory(bbghistory)
+	if InterfaceOptions_AddCategory then -- XXX compat
+		InterfaceOptions_AddCategory(bbghistory)
+	else
+		local subcategory = Settings.RegisterCanvasLayoutSubcategory(frame.settingsCategory, bbghistory, bbghistory.name)
+		Settings.RegisterAddOnCategory(subcategory)
+	end
 
 	local bbghistoryTitle = bbghistory:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	bbghistoryTitle:SetPoint("TOPLEFT", 16, -16)
