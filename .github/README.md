@@ -5,4 +5,5 @@
 * Logs all chat removed by BadBoy and the BadBoy plugins.
 
 ## Download
-https://www.curseforge.com/wow/addons/badboy_history
+* <https://www.curseforge.com/wow/addons/badboy_history>
+* <https://addons.wago.io/addons/badboy-history>
